@@ -74,6 +74,7 @@
     <Compile Include="CAnimator.cs" />
     <Compile Include="Animation.cs" />
     <Compile Include="CCrab.cs" />
+    <Compile Include="CrabBuilder.cs" />
     <Compile Include="Director.cs" />
     <Compile Include="IAnimateable.cs" />
     <Compile Include="IBuilder.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="CTransform.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="GameWorld.cs" />
+    <Compile Include="OpponentCrabBuilder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
