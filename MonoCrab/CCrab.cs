@@ -90,6 +90,7 @@ namespace MonoCrab
             if (other.gameObject.GetComponent("CBait") != null)
             {
                 GameWorld.gameWorld.BaitList.Remove(other.gameObject);
+                GameWorld.gameWorld.GameObjects.Remove(other.gameObject);
             }
         }
     }
