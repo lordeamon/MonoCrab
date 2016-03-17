@@ -18,6 +18,20 @@ namespace MonoCrab
         private float turnSpeed = 3;
         private Vector2 closestTarget;
 
+        private int energy = 100;
+        public int Energy
+        {
+            get
+            {
+                return energy;
+            }
+
+            set
+            {
+                energy = value;
+            }
+        }
+
         public CCrab(GameObject gameObject) : base(gameObject)
         {
             //this.animator = (CAnimator)gameObject.GetComponent("CAnimator");
