@@ -65,6 +65,18 @@ namespace MonoCrab
             }
         }
 
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            foreach (Component component in components)
+            {
+                if (component is IDrawable)
+                {
+                    (component as IDrawable).Draw(spriteBatch);
+
+                }
+            }
+        }
+
         public void Update()
         {
             foreach (Component component in components)
@@ -121,16 +133,6 @@ namespace MonoCrab
 
             }
         }
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            foreach (Component component in components)
-            {
-                if (component is IDrawable)
-                {
-                    (component as IDrawable).Draw(spriteBatch);
-                    
-                }
-            }
-        }
+        
     }
 }

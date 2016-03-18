@@ -61,9 +61,11 @@ namespace MonoCrab
             this.Rectangle = new Rectangle(0,0,sprite.Width,sprite.Height);
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor, gameObject.Transform.rotation,new Vector2(sprite.Width / 2,sprite.Height / 2), 1, SpriteEffects.None, layerDepth);
+            spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor, gameObject.Transform.rotation, Vector2.Zero, 1, SpriteEffects.None, layerDepth);
+
+            //spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor, gameObject.Transform.rotation,new Vector2(Rectangle.Width / 2, Rectangle.Height / 2), 1, SpriteEffects.None, layerDepth);
         }
     }
 }

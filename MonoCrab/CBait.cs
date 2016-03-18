@@ -33,12 +33,13 @@ namespace MonoCrab
             this.Energy = energy;
             this.animator = (CAnimator)gameObject.GetComponent("CAnimator");
             GameWorld.gameWorld.BaitList.Add(gameObject);
+            
 
         }
 
         public void LoadContent(ContentManager content)
         {
-            CreateAnimations();
+           CreateAnimations();
         }
 
 
@@ -82,7 +83,7 @@ namespace MonoCrab
 
         public void OnAnimationDone(string animationName)
         {
-            animator.PlayAnimation("Spin");
+            //animator.PlayAnimation("Spin");
         }
     }
 }

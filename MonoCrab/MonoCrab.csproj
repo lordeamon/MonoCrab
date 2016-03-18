@@ -113,6 +113,9 @@
     <Content Include="Content\CollisionTexture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\crab.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\NegBait1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

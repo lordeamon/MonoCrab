@@ -44,8 +44,7 @@ namespace MonoCrab
         {
             get
             {
-                return new Rectangle
-                    (
+                return new Rectangle(
                     (int)(gameObject.Transform.position.X + spriteRenderer.Offset.X),
                     (int)(gameObject.Transform.position.Y + spriteRenderer.Offset.Y),
                     spriteRenderer.Rectangle.Width,
@@ -64,15 +63,20 @@ namespace MonoCrab
             Rectangle rightLine = new Rectangle(CollisionBox.X + CollisionBox.Width, CollisionBox.Y, 1, CollisionBox.Height);
             Rectangle leftLine = new Rectangle(CollisionBox.X, CollisionBox.Y, 1, CollisionBox.Height);
             
-            //spriteBatch.Draw(texture, topLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
-            //spriteBatch.Draw(texture, bottomLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
-            //spriteBatch.Draw(texture, rightLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
-            //spriteBatch.Draw(texture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+           spriteBatch.Draw(texture, topLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+           spriteBatch.Draw(texture, bottomLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+           spriteBatch.Draw(texture, rightLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
+           spriteBatch.Draw(texture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
 
-            spriteBatch.Draw(texture, topLine.Location.ToVector2() + spriteRenderer.Offset, topLine, Color.Red, 0, new Vector2(spriteRenderer.Sprite.Width / 2, spriteRenderer.Sprite.Height / 2), 1, SpriteEffects.None, 0.3f);
-            spriteBatch.Draw(texture, bottomLine.Location.ToVector2() + spriteRenderer.Offset, bottomLine, Color.Red, 0, new Vector2(spriteRenderer.Sprite.Width / 2, spriteRenderer.Sprite.Height / 2), 1, SpriteEffects.None, 0.3f);
-            spriteBatch.Draw(texture, rightLine.Location.ToVector2() + spriteRenderer.Offset, rightLine, Color.Red,0, new Vector2(spriteRenderer.Sprite.Width / 2, spriteRenderer.Sprite.Height / 2), 1, SpriteEffects.None, 0.3f);
-            spriteBatch.Draw(texture, leftLine.Location.ToVector2() + spriteRenderer.Offset, leftLine, Color.Red, 0, new Vector2(spriteRenderer.Sprite.Width / 2, spriteRenderer.Sprite.Height / 2), 1, SpriteEffects.None, 0.3f);
+            //don't draw collision boxes when pixel collision is on
+            if (!pixelCollision)
+            {
+                spriteBatch.Draw(texture, topLine.Location.ToVector2() + spriteRenderer.Offset, topLine, Color.Red, 0, new Vector2(spriteRenderer.Sprite.Width / 2, spriteRenderer.Sprite.Height / 2), 1, SpriteEffects.None, 0.3f);
+                spriteBatch.Draw(texture, bottomLine.Location.ToVector2() + spriteRenderer.Offset, bottomLine, Color.Red, 0, new Vector2(spriteRenderer.Sprite.Width / 2, spriteRenderer.Sprite.Height / 2), 1, SpriteEffects.None, 0.3f);
+                spriteBatch.Draw(texture, rightLine.Location.ToVector2() + spriteRenderer.Offset, rightLine, Color.Red, 0, new Vector2(spriteRenderer.Sprite.Width / 2, spriteRenderer.Sprite.Height / 2), 1, SpriteEffects.None, 0.3f);
+                spriteBatch.Draw(texture, leftLine.Location.ToVector2() + spriteRenderer.Offset, leftLine, Color.Red, 0, new Vector2(spriteRenderer.Sprite.Width / 2, spriteRenderer.Sprite.Height / 2), 1, SpriteEffects.None, 0.3f);
+            }
+            
 
             //+ (int)spriteRenderer.Offset.X
         }
@@ -134,7 +138,7 @@ namespace MonoCrab
         private void CachePixels()
         {
             
-                foreach (KeyValuePair<string, Animation> pair in animator.Animations)
+                foreach (KeyValuePair<string, Animation> pair in animator.animations)
                 {
                     Animation animation = pair.Value;
 
