@@ -18,9 +18,9 @@ namespace MonoCrab
         }
         private float timeElapsed;
         private float fps;
-        private Rectangle[] rectangles;
+        public Rectangle[] rectangles;
         //The amount of pictures in your picture strip
-        private int stripLength = 8;
+        private int stripLength = 4;
         private string animationName;
         public string AnimationName
         {
@@ -28,37 +28,40 @@ namespace MonoCrab
             set { animationName = value; }
         }
 
-        //private Dictionary<string, Animation> animations;
+        private Dictionary<string, Animation> animations;
 
-        public Dictionary<string, Animation> animations;
-        
+        public Dictionary<string, Animation> Animations
+        {
+            get
+            {
+                return animations;
+            }
+
+            set
+            {
+                animations = value;
+            }
+        }
 
        
 
 
         public CAnimator(GameObject gameObject) : base (gameObject)
         {
-            
             fps = 5;
             animations = new Dictionary<string, Animation>();
             this.spriteRenderer = (CSpriteRenderer)gameObject.GetComponent("CSpriteRenderer");
-            
         }
         public void LoadContent(ContentManager content)
         {
-            //int width = (spriteRenderer.Sprite.Width / animations[animationName].Fps;
+            //int width = spriteRenderer.Sprite.Width / animations[animationName].Fps;
             //rectangles = new Rectangle[stripLength];
             //for (int i = 0; i < stripLength; i++)
             //{
             //    rectangles[i] = new Rectangle(i * width, 0, width, spriteRenderer.Sprite.Height);
             //}
         }
-        public void CreateAnimation(string name, Animation animation)
-        {
-            animations.Add(name, animation);
-           // rectangles = animation.Rectangles;
 
-        }
         public void Update()
         {
             timeElapsed += GameWorld.gameWorld.deltaTime;
@@ -71,9 +74,13 @@ namespace MonoCrab
                 CurrentIndex = 0;
             }
             spriteRenderer.Rectangle = rectangles[CurrentIndex];
+
         }
 
-        
+        public void CreateAnimation(string name, Animation animation)
+        {
+            animations.Add(name,animation);
+        }
 
         public void PlayAnimation(string animationName)
         {

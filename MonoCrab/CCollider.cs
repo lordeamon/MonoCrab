@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Runtime.Remoting.Messaging;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -9,6 +11,7 @@ namespace MonoCrab
 {
     class CCollider : Component, IDrawable, ILoadable, IUpdateable
     {
+        private int animationframes;
         private CSpriteRenderer spriteRenderer;
         private Texture2D texture;
         private List<CCollider> otherColliders;
@@ -32,23 +35,28 @@ namespace MonoCrab
         {
             doCollisionCheck = true;
         }
-        public CCollider(GameObject gameObject, bool pixelCollision) : base(gameObject)
+        public CCollider(GameObject gameObject, bool pixelCollision, int frames) : base(gameObject)
         {
             otherColliders = new List<CCollider>();
             GameWorld.gameWorld.Colliders.Add(this);
             this.pixelCollision = pixelCollision;
+            animator = (CAnimator)gameObject.GetComponent("CAnimator");
+            this.animationframes = frames;
 
         }
-
+        /// <summary>
+        /// Creates a collision box based on the sprite and an animation. Since we are using rotations on some objects, we hardcoded the collisionbox
+        /// </summary>
         public Rectangle CollisionBox
         {
             get
             {
-                return new Rectangle(
-                    (int)(gameObject.Transform.position.X + spriteRenderer.Offset.X),
-                    (int)(gameObject.Transform.position.Y + spriteRenderer.Offset.Y),
-                    spriteRenderer.Rectangle.Width,
-                    spriteRenderer.Rectangle.Height
+                return new Rectangle
+                    (
+                    (int)(gameObject.Transform.position.X - spriteRenderer.Rectangle.Width /2 + spriteRenderer.Offset.X),
+                    (int)(gameObject.Transform.position.Y - spriteRenderer.Rectangle.Height / 2 + spriteRenderer.Offset.Y),
+                    spriteRenderer.Sprite.Width / animationframes,
+                    spriteRenderer.Sprite.Height
                     );
             }
         }
@@ -62,36 +70,24 @@ namespace MonoCrab
             Rectangle bottomLine = new Rectangle(CollisionBox.X, CollisionBox.Y + CollisionBox.Height, CollisionBox.Width, 1);
             Rectangle rightLine = new Rectangle(CollisionBox.X + CollisionBox.Width, CollisionBox.Y, 1, CollisionBox.Height);
             Rectangle leftLine = new Rectangle(CollisionBox.X, CollisionBox.Y, 1, CollisionBox.Height);
-            
-           spriteBatch.Draw(texture, topLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
-           spriteBatch.Draw(texture, bottomLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
-           spriteBatch.Draw(texture, rightLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
-           spriteBatch.Draw(texture, leftLine, null, Color.Red, 0, Vector2.Zero, SpriteEffects.None, 1);
 
-            //don't draw collision boxes when pixel collision is on
-            if (!pixelCollision)
-            {
-                spriteBatch.Draw(texture, topLine.Location.ToVector2() + spriteRenderer.Offset, topLine, Color.Red, 0, new Vector2(spriteRenderer.Sprite.Width / 2, spriteRenderer.Sprite.Height / 2), 1, SpriteEffects.None, 0.3f);
-                spriteBatch.Draw(texture, bottomLine.Location.ToVector2() + spriteRenderer.Offset, bottomLine, Color.Red, 0, new Vector2(spriteRenderer.Sprite.Width / 2, spriteRenderer.Sprite.Height / 2), 1, SpriteEffects.None, 0.3f);
-                spriteBatch.Draw(texture, rightLine.Location.ToVector2() + spriteRenderer.Offset, rightLine, Color.Red, 0, new Vector2(spriteRenderer.Sprite.Width / 2, spriteRenderer.Sprite.Height / 2), 1, SpriteEffects.None, 0.3f);
-                spriteBatch.Draw(texture, leftLine.Location.ToVector2() + spriteRenderer.Offset, leftLine, Color.Red, 0, new Vector2(spriteRenderer.Sprite.Width / 2, spriteRenderer.Sprite.Height / 2), 1, SpriteEffects.None, 0.3f);
-            }
+            spriteBatch.Draw(texture, topLine, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(texture, bottomLine, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(texture, rightLine, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 1);
+            spriteBatch.Draw(texture, leftLine, null, Color.White, 0, Vector2.Zero, SpriteEffects.None, 1);
             
-
-            //+ (int)spriteRenderer.Offset.X
         }
 
         public void LoadContent(ContentManager content)
         {
 
             spriteRenderer = (CSpriteRenderer)gameObject.GetComponent("CSpriteRenderer");
-            animator = (CAnimator)gameObject.GetComponent("CAnimator");
-
             texture = content.Load<Texture2D>("CollisionTexture");
             if (pixelCollision)
             {
                 CachePixels();
             }
+            
         }
 
         public void Update()
@@ -138,7 +134,7 @@ namespace MonoCrab
         private void CachePixels()
         {
             
-                foreach (KeyValuePair<string, Animation> pair in animator.animations)
+                foreach (KeyValuePair<string, Animation> pair in animator.Animations)
                 {
                     Animation animation = pair.Value;
 

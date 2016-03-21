@@ -16,7 +16,7 @@ namespace MonoCrab
         private Texture2D sprite;
         private Vector2 offset;
         private Color color;
-        
+        private CAnimator animator;
         public Color drawColor
         {
             get { return color; }
@@ -44,7 +44,7 @@ namespace MonoCrab
 
         public CSpriteRenderer(GameObject gameObject, string spriteName, Color drawColor, float layerDepth) : base (gameObject)
         {
-            
+            this.animator = (CAnimator)gameObject.GetComponent("CAnimator");
             this.drawColor = drawColor;
             this.spriteName = spriteName;
             this.layerDepth = layerDepth;
@@ -58,14 +58,31 @@ namespace MonoCrab
         public void LoadContent(ContentManager content)
         {
             sprite = content.Load<Texture2D>(spriteName);
-            this.Rectangle = new Rectangle(0,0,sprite.Width,sprite.Height);
+            //If this gameobject does not have an animator, use a default rectangle.
+            if (gameObject.GetComponent("CAnimator") == null)
+            {
+                this.Rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
+
+            }
+            else
+            {
+                //rectangle is set via CAnimator
+            }
         }
 
-        public virtual void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor, gameObject.Transform.rotation, Vector2.Zero, 1, SpriteEffects.None, layerDepth);
+        public void Draw(SpriteBatch spriteBatch)
+        {   
+            //if our game object has an animator, draw the current animation frame at the correct spot.
+            if (gameObject.GetComponent("CAnimator") != null)
+            {
+                spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor, gameObject.Transform.rotation,new Vector2(Rectangle.Width / 2,Rectangle.Height / 2), 1, SpriteEffects.None, layerDepth);
 
-            //spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor, gameObject.Transform.rotation,new Vector2(Rectangle.Width / 2, Rectangle.Height / 2), 1, SpriteEffects.None, layerDepth);
+            }
+            else
+            {
+                 spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor, gameObject.Transform.rotation,new Vector2(Sprite.Width / 2,sprite.Height / 2), 1, SpriteEffects.None, layerDepth);
+
+            }
         }
     }
 }
