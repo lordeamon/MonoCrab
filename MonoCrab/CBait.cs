@@ -32,7 +32,7 @@ namespace MonoCrab
         {
             this.Energy = energy;
             this.animator = (CAnimator)gameObject.GetComponent("CAnimator");
-            GameWorld.gameWorld.BaitList.Add(gameObject);
+            
             
 
         }

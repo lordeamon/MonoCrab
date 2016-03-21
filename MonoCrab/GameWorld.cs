@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -74,7 +75,7 @@ namespace MonoCrab
             crab.AddComponent(new CSpriteRenderer(crab,"crab",Color.White,0.3f));
             crab.AddComponent(new CAnimator(crab));
             crab.AddComponent(new CCrab(crab));
-            crab.AddComponent(new CCollider(crab,false, 6));
+            crab.AddComponent(new CCollider(crab,true, 6));
             gameObjects.Add(crab);
 
             //GameObject newcrab = new GameObject(new Vector2(300, 300));
@@ -84,17 +85,23 @@ namespace MonoCrab
             //gameObjects.Add(newcrab);
 
             GameObject bait = new GameObject(new Vector2(400,360));
-            bait.AddComponent(new CSpriteRenderer(bait,"bait",Color.White,1f));
-            //bait.AddComponent(new CAnimator(bait));
-            bait.AddComponent(new CBait(bait));
-            bait.AddComponent(new CCollider(bait,false,1));
+            bait.AddComponent(new CSpriteRenderer(bait,"NegBait1",Color.White,1f));
+            bait.AddComponent(new CAnimator(bait));
+
+            bait.AddComponent(new CBait(bait,1));
+            bait.AddComponent(new CCollider(bait,true,8));
+            
+
             gameObjects.Add(bait);
             baitlist.Add(bait);
 
             GameObject newbait = new GameObject(new Vector2(400, 100));
-            newbait.AddComponent(new CSpriteRenderer(newbait, "bait", Color.White, 1f));
-            newbait.AddComponent(new CBait(newbait));
-            newbait.AddComponent(new CCollider(newbait, false,1));
+            newbait.AddComponent(new CSpriteRenderer(newbait, "PosBait1", Color.White, 1f));
+            newbait.AddComponent(new CAnimator(newbait));
+
+            newbait.AddComponent(new CBait(newbait,1));
+            newbait.AddComponent(new CCollider(newbait, true,8));
+
             gameObjects.Add(newbait);
             baitlist.Add(newbait);
         }

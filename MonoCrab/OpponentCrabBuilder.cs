@@ -64,7 +64,7 @@ namespace MonoCrab
 
             gameObject.AddComponent(new CCrab(gameObject));
             gameObject.AddComponent(new CAnimator(gameObject));
-            gameObject.AddComponent(new CCollider(gameObject, true));
+            gameObject.AddComponent(new CCollider(gameObject, false,8));
         }
     }
 }
