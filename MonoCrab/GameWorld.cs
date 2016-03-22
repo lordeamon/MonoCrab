@@ -101,7 +101,7 @@ namespace MonoCrab
             gameObjects.Add(newcrab);
 
             GameObject bait = new GameObject(new Vector2(6300,3500));
-            bait.AddComponent(new CSpriteRenderer(bait,"NegBait1",Color.White,0.5f));
+            bait.AddComponent(new CSpriteRenderer(bait,"NegBait5",Color.White,0.5f));
             bait.AddComponent(new CAnimator(bait));
 
             bait.AddComponent(new CBait(bait,1));
@@ -112,7 +112,7 @@ namespace MonoCrab
             baitlist.Add(bait);
 
             GameObject newbait = new GameObject(new Vector2(5400, 600));
-            newbait.AddComponent(new CSpriteRenderer(newbait, "PosBait1", Color.White, 1f));
+            newbait.AddComponent(new CSpriteRenderer(newbait, "NegBait5", Color.White, 0.5f));
             newbait.AddComponent(new CAnimator(newbait));
 
             newbait.AddComponent(new CBait(newbait,1));
