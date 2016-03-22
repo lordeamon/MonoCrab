@@ -52,19 +52,19 @@ namespace MonoCrab
         { 
             if(Energy == -5 || Energy == 5)
             { 
-            animator.CreateAnimation("Spin", new Animation(8, 0, 0, 180, 180, 8, Vector2.Zero));
+            animator.CreateAnimation("Spin", new Animation(8, 0, 0, 90, 90, 8, Vector2.Zero));
             animator.PlayAnimation("Spin");
             }
             
             else if (Energy == -3 || Energy == 3 )
             {
-                animator.CreateAnimation("Spin", new Animation(8, 0, 0, 150, 150, 8, Vector2.Zero));
+                animator.CreateAnimation("Spin", new Animation(8, 0, 0, 75, 75, 8, Vector2.Zero));
                 animator.PlayAnimation("Spin");
             }
 
             else if (Energy == -1 || Energy == 1)
             {
-                animator.CreateAnimation("Spin", new Animation(8, 0, 0, 120, 120, 8, Vector2.Zero));
+                animator.CreateAnimation("Spin", new Animation(8, 0, 0, 60, 60, 8, Vector2.Zero));
                 animator.PlayAnimation("Spin");
             }
         }
