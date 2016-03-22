@@ -18,10 +18,11 @@ namespace MonoCrab
         public void BuildGameObject(Vector2 position)
         {
             gameObject = new GameObject(position);
-            gameObject.AddComponent(new CSpriteRenderer(gameObject, "testcrab", Color.White, 1));
-            gameObject.AddComponent(new CCrab(gameObject));
+            gameObject.AddComponent(new CSpriteRenderer(gameObject, "crab", Color.White, 0.5f));
             gameObject.AddComponent(new CAnimator(gameObject));
-            gameObject.AddComponent(new CCollider(gameObject, false,8));
+            gameObject.AddComponent(new CCrab(gameObject));
+            gameObject.AddComponent(new CCollider(gameObject, true,6));
+            GameWorld.gameWorld.GameObjects.Add(gameObject);
         }
     }
 }

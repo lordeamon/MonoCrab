@@ -21,6 +21,7 @@ namespace MonoCrab
         public Rectangle displayRectangle;
         private Texture2D background;
         public bool startGame = false;
+        private float spawnTimer;
         public static GameWorld gameWorld
         {
             get
@@ -84,42 +85,13 @@ namespace MonoCrab
             gameObjects.Add(introMenu);
 
 
-            GameObject crab = new GameObject(new Vector2(5500,2300));
-            crab.AddComponent(new CSpriteRenderer(crab,"crab",Color.White,0.5f));
-            crab.AddComponent(new CAnimator(crab));
-            crab.AddComponent(new CCrab(crab));
-            crab.AddComponent(new CCollider(crab,true, 6));
-            gameObjects.Add(crab);
+            Director crabDirector = new Director(new CrabBuilder());
+            crabDirector.Construct(new Vector2(5500, 2300));
+            //crabDirector.Construct(new Vector2(5650, 2000));
 
-
-
-            GameObject newcrab = new GameObject(new Vector2(5650, 2000));
-            newcrab.AddComponent(new CSpriteRenderer(newcrab, "crab", Color.White, 0.5f));
-            newcrab.AddComponent(new CAnimator(newcrab));
-            newcrab.AddComponent(new CCrab(newcrab));
-            newcrab.AddComponent(new CCollider(newcrab, true, 6));
-            gameObjects.Add(newcrab);
-
-            GameObject bait = new GameObject(new Vector2(6300,3500));
-            bait.AddComponent(new CSpriteRenderer(bait,"PosBait5",Color.White,0.5f));
-            bait.AddComponent(new CAnimator(bait));
-
-            bait.AddComponent(new CBait(bait,1));
-            bait.AddComponent(new CCollider(bait,true,8));
+            Director baitDirector = new Director(new NBait1());
+            baitDirector.Construct(new Vector2(6300, 3500));
             
-
-            gameObjects.Add(bait);
-            baitlist.Add(bait);
-
-            GameObject newbait = new GameObject(new Vector2(5400, 600));
-            newbait.AddComponent(new CSpriteRenderer(newbait, "NegBait5", Color.White, 0.5f));
-            newbait.AddComponent(new CAnimator(newbait));
-
-            newbait.AddComponent(new CBait(newbait,1));
-            newbait.AddComponent(new CCollider(newbait, true,8));
-
-            gameObjects.Add(newbait);
-            baitlist.Add(newbait);
         }
 
         /// <summary>
@@ -187,7 +159,7 @@ namespace MonoCrab
             }
             //Update our camera
             gameCamera.Update();
-            
+            spawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             base.Update(gameTime);
         }
         
