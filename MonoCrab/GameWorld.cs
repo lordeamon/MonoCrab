@@ -20,6 +20,7 @@ namespace MonoCrab
         private static GameWorld GM;
         public Rectangle displayRectangle;
         private Texture2D background;
+        public bool startGame = false;
         public static GameWorld gameWorld
         {
             get
@@ -71,20 +72,28 @@ namespace MonoCrab
         /// </summary>
         private void AddGameObjects()
         {
-            GameObject crab = new GameObject(new Vector2(100,100));
+            GameObject introMenu = new GameObject(new Vector2(4000,2250));
+            introMenu.AddComponent(new CSpriteRenderer(introMenu, "welcomescreen", Color.White, 1f));
+            introMenu.AddComponent(new CIntroMenu(introMenu));
+            gameObjects.Add(introMenu);
+
+
+            GameObject crab = new GameObject(new Vector2(3000,2400));
             crab.AddComponent(new CSpriteRenderer(crab,"crab",Color.White,0.3f));
             crab.AddComponent(new CAnimator(crab));
             crab.AddComponent(new CCrab(crab));
             crab.AddComponent(new CCollider(crab,true, 6));
             gameObjects.Add(crab);
 
-            //GameObject newcrab = new GameObject(new Vector2(300, 300));
-            //newcrab.AddComponent(new CSpriteRenderer(newcrab, "crap", Color.White, 1f));
-            //newcrab.AddComponent(new CAnimator(newcrab));
-            //newcrab.AddComponent(new CCrab(newcrab));
-            //gameObjects.Add(newcrab);
 
-            GameObject bait = new GameObject(new Vector2(400,360));
+
+            GameObject newcrab = new GameObject(new Vector2(300, 300));
+            newcrab.AddComponent(new CSpriteRenderer(newcrab, "crab", Color.White, 1f));
+            newcrab.AddComponent(new CAnimator(newcrab));
+            newcrab.AddComponent(new CCrab(newcrab));
+            gameObjects.Add(newcrab);
+
+            GameObject bait = new GameObject(new Vector2(6300,3500));
             bait.AddComponent(new CSpriteRenderer(bait,"NegBait1",Color.White,1f));
             bait.AddComponent(new CAnimator(bait));
 
@@ -95,7 +104,7 @@ namespace MonoCrab
             gameObjects.Add(bait);
             baitlist.Add(bait);
 
-            GameObject newbait = new GameObject(new Vector2(401, 100));
+            GameObject newbait = new GameObject(new Vector2(5400, 600));
             newbait.AddComponent(new CSpriteRenderer(newbait, "PosBait1", Color.White, 1f));
             newbait.AddComponent(new CAnimator(newbait));
 
@@ -142,7 +151,7 @@ namespace MonoCrab
                     go.LoadContent(this.Content);
                 }
             }
-            background = Content.Load<Texture2D>("MonoCrabBackground");
+            background = Content.Load<Texture2D>("Background");
         }
 
         /// <summary>
@@ -166,13 +175,13 @@ namespace MonoCrab
                 Exit();
 
             // TODO: Add your update logic here
-            foreach (GameObject go in GameObjects)
+            foreach (GameObject go in GameObjects.ToList())
             {
                 go.Update();
-                
             }
             //Update our camera
             gameCamera.Update();
+            
             base.Update(gameTime);
         }
         
@@ -187,9 +196,7 @@ namespace MonoCrab
             // TODO: Add your drawing code here
             //
             spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, null, null, null, null, gameCamera.viewMatrix);
-
-
-            spriteBatch.Draw(background,Vector2.Zero, displayRectangle, Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0f);
+            
 
 
             foreach (GameObject go in GameObjects)
@@ -197,8 +204,11 @@ namespace MonoCrab
                 go.Draw(spriteBatch);
             }
 
+            spriteBatch.Draw(background, Vector2.Zero);
 
             spriteBatch.End();
+            //spriteBatch.Begin();
+            //spriteBatch.End();
             base.Draw(gameTime);
         }
     }
