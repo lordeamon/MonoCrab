@@ -46,6 +46,12 @@ namespace MonoCrab
             get { return gameObjects; }
             set { gameObjects = value; }
         }
+        List<GameObject> crabList = new List<GameObject>();
+        internal List<GameObject> CrabList
+        {
+            get { return crabList; }
+            set { crabList = value; }
+        }
         List<GameObject> baitlist = new List<GameObject>();
 
 

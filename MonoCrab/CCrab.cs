@@ -34,7 +34,7 @@ namespace MonoCrab
         public CCrab(GameObject gameObject) : base(gameObject)
         {
             this.animator = (CAnimator)gameObject.GetComponent("CAnimator");
-            
+            GameWorld.gameWorld.CrabList.Add(this.gameObject);
             gameObject.Transform.speed = speed;
             gameObject.Transform.turnSpeed = turnSpeed;
         }

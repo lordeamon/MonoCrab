@@ -10,12 +10,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoCrab
 {
-    class CSpriteRenderer : Component,ILoadable, IDrawable
+    class CSpriteRenderer : Component,ILoadable, IDrawable, IUpdateable
     {
         public Rectangle Rectangle { get; set; }
         private Texture2D sprite;
         private Vector2 offset;
         private Color color;
+        public float fade = 1f;
         private CAnimator animator;
         public Color drawColor
         {
@@ -48,11 +49,7 @@ namespace MonoCrab
             this.drawColor = drawColor;
             this.spriteName = spriteName;
             this.layerDepth = layerDepth;
-            //If the user decides not to set a color, fall back to a color
-            if (drawColor == null)
-            {
-                drawColor = Color.White;
-            }
+            
         }
 
         public void LoadContent(ContentManager content)
@@ -75,14 +72,19 @@ namespace MonoCrab
             //if our game object has an animator, draw the current animation frame at the correct spot.
             if (gameObject.GetComponent("CAnimator") != null)
             {
-                spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor, gameObject.Transform.rotation,new Vector2(Rectangle.Width / 2,Rectangle.Height / 2), 1, SpriteEffects.None, layerDepth);
+                spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor * fade, gameObject.Transform.rotation,new Vector2(Rectangle.Width / 2,Rectangle.Height / 2), 1, SpriteEffects.None, layerDepth);
 
             }
             else
             {
-                 spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor, gameObject.Transform.rotation,new Vector2(Sprite.Width / 2,sprite.Height / 2), 1, SpriteEffects.None, layerDepth);
+                 spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor * fade, gameObject.Transform.rotation,new Vector2(Sprite.Width / 2,sprite.Height / 2), 1, SpriteEffects.None, layerDepth);
 
             }
+        }
+
+        public void Update()
+        {
+           
         }
     }
 }

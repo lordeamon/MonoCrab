@@ -49,31 +49,25 @@ namespace MonoCrab
         {
             if (shouldLerp && zoom != 1.0f)
             {
-                GameWorld.gameWorld.gameCamera.zoom = MathHelper.Lerp(GameWorld.gameWorld.gameCamera.zoom, 1.0f, 0.5f * GameWorld.gameWorld.deltaTime);
+                GameWorld.gameWorld.gameCamera.zoom = MathHelper.Lerp(GameWorld.gameWorld.gameCamera.zoom, 1.0f, 0.2f * GameWorld.gameWorld.deltaTime);
             }
-            
-
-            for (int i = 0; i < GameWorld.gameWorld.GameObjects.Count; i++)
+           
+            if (!GameWorld.gameWorld.startGame)
             {
-                
-               // if (GameWorld.gameWorld.GameObjects[i].GetComponent("CCrab") != null)
-               // {
-                if (!GameWorld.gameWorld.startGame)
+                foreach (GameObject go in GameWorld.gameWorld.GameObjects)
                 {
-                    if (GameWorld.gameWorld.GameObjects[i].GetComponent("CIntroMenu") != null)
+                    if (go.GetComponent("CIntroMenu") != null)
                     {
-                        target = GameWorld.gameWorld.GameObjects[i].Transform.position;
-
+                        target = go.Transform.position;
                     }
                 }
-                else
+            }
+            else if (GameWorld.gameWorld.startGame)
+            {
+                for (int i = 0; i < GameWorld.gameWorld.CrabList.Count; i++)
                 {
-
-                     target = GameWorld.gameWorld.GameObjects[targetIndex].Transform.position;
-
+                    target = GameWorld.gameWorld.CrabList[targetIndex].Transform.position;
                 }
-
-                
             }
             keyState = Keyboard.GetState();
 
@@ -82,13 +76,13 @@ namespace MonoCrab
 
             if (NewKeyState.IsKeyDown(Keys.Q) && oldState.IsKeyUp(Keys.Q))
             {
-                if (targetIndex < GameWorld.gameWorld.GameObjects.Count && targetIndex > 0)
+                if (targetIndex < GameWorld.gameWorld.CrabList.Count && targetIndex > 0)
                 {
                     targetIndex--;
                 }
                 else
                 {
-                    targetIndex = GameWorld.gameWorld.GameObjects.Count - 1;
+                    targetIndex = GameWorld.gameWorld.CrabList.Count - 1;
                     
 
                 }
@@ -100,7 +94,7 @@ namespace MonoCrab
 
             if (NewKey1State.IsKeyDown(Keys.E) && oldState1.IsKeyUp(Keys.E))
             {
-                if (targetIndex < GameWorld.gameWorld.GameObjects.Count - 1)
+                if (targetIndex < GameWorld.gameWorld.CrabList.Count - 1)
                 {
                     targetIndex++;
                     

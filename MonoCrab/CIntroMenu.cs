@@ -10,9 +10,11 @@ namespace MonoCrab
 {
     class CIntroMenu : Component, IUpdateable
     {
+        private CSpriteRenderer spriteRenderer;
+        private float fade = 1;
         public CIntroMenu(GameObject gameObject) : base(gameObject)
         {
-            
+            this.spriteRenderer = (CSpriteRenderer) gameObject.GetComponent("CSpriteRenderer");
         }
 
         public void Update()
@@ -23,7 +25,17 @@ namespace MonoCrab
             {
                 GameWorld.gameWorld.gameCamera.shouldLerp = true;
                 GameWorld.gameWorld.startGame = true;
+                
+            }
+            if (GameWorld.gameWorld.startGame)
+            {
+                //fade = MathHelper.Lerp(1, 0, 5f*GameWorld.gameWorld.deltaTime);
+                spriteRenderer.fade -= 0.01f;
+                if (spriteRenderer.fade <= 0)
+                {
                 GameWorld.gameWorld.GameObjects.Remove(this.gameObject);
+
+                }
             }
             
         }
