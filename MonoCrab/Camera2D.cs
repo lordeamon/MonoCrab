@@ -49,7 +49,7 @@ namespace MonoCrab
         {
             if (shouldLerp && zoom != 1.0f)
             {
-               // GameWorld.gameWorld.gameCamera.zoom = MathHelper.Lerp(GameWorld.gameWorld.gameCamera.zoom, 1.0f, 0.5f * GameWorld.gameWorld.deltaTime);
+                GameWorld.gameWorld.gameCamera.zoom = MathHelper.Lerp(GameWorld.gameWorld.gameCamera.zoom, 1.0f, 0.5f * GameWorld.gameWorld.deltaTime);
             }
             
 

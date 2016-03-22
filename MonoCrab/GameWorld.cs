@@ -79,7 +79,7 @@ namespace MonoCrab
 
 
             GameObject crab = new GameObject(new Vector2(5500,2300));
-            crab.AddComponent(new CSpriteRenderer(crab,"crab",Color.Red,0.5f));
+            crab.AddComponent(new CSpriteRenderer(crab,"crab",Color.White,0.5f));
             crab.AddComponent(new CAnimator(crab));
             crab.AddComponent(new CCrab(crab));
             crab.AddComponent(new CCollider(crab,true, 6));
@@ -88,7 +88,7 @@ namespace MonoCrab
 
 
             GameObject newcrab = new GameObject(new Vector2(5650, 2000));
-            newcrab.AddComponent(new CSpriteRenderer(newcrab, "crab", Color.Red, 0.5f));
+            newcrab.AddComponent(new CSpriteRenderer(newcrab, "crab", Color.White, 0.5f));
             newcrab.AddComponent(new CAnimator(newcrab));
             newcrab.AddComponent(new CCrab(newcrab));
             newcrab.AddComponent(new CCollider(newcrab, true, 6));
