@@ -52,23 +52,36 @@ namespace MonoCrab
         {
             float minDist = float.MaxValue;
 
-            foreach (GameObject t in GameWorld.gameWorld.BaitList.ToList())
+            foreach (GameObject t in GameWorld.gameWorld.GameObjects.ToList())
             {
-                float dist = Vector2.Distance(t.Transform.position, gameObject.Transform.position);
-                if (dist < minDist)
+                if (t.GetComponent("CBait") != null)
                 {
-                    closestTarget = t.Transform.position;
-                    minDist = dist;
+                    //CCrab bait = (CCrab)t.GetComponent("CCrab");
+
+                    float dist = Vector2.Distance(t.Transform.position, gameObject.Transform.position);
+                    if (dist < minDist)
+                    {
+                        closestTarget = t.Transform.position;
+                        minDist = dist;
+                        //return closestTarget;
+                        
+                    }
                 }
+
             }
             return closestTarget;
+
         }
 
         public void Update()
         {
-            GetClosestBait();
-            gameObject.Transform.MoveTo(closestTarget, true);
-            //gameObject.Transform.LookAt(closestTarget);
+            //If the main menu is active, don't start the crabs
+            if (GameWorld.gameWorld.startGame)
+            {
+                GetClosestBait();
+                gameObject.Transform.MoveTo(closestTarget, true);
+            }
+            
         }
 
         public void OnAnimationDone(string animationName)
@@ -91,7 +104,7 @@ namespace MonoCrab
             if (other.gameObject.GetComponent("CBait") != null)
             {
                 Debug.Print("COLLIDED WITH BAIT");
-                GameWorld.gameWorld.BaitList.Remove(other.gameObject);
+                GameWorld.gameWorld.GameObjects.Remove(other.gameObject);
             }
         }
     }
