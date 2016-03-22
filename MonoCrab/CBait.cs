@@ -27,7 +27,6 @@ namespace MonoCrab
             }
         }
 
-
         public CBait(GameObject gameObject, int energy) : base(gameObject)
         {
             this.Energy = energy;
@@ -46,20 +45,20 @@ namespace MonoCrab
         { 
             if(Energy == -5 || Energy == 5)
             { 
-            animator.CreateAnimation("Spin", new Animation(8, 0, 0, 90, 90, 8, Vector2.Zero));
-            animator.PlayAnimation("Spin");
+            animator.CreateAnimation("large", new Animation(8, 0, 0, 90, 90, 8, Vector2.Zero));
+            animator.PlayAnimation("large");
             }
             
             else if (Energy == -3 || Energy == 3 )
             {
-                animator.CreateAnimation("Spin", new Animation(8, 0, 0, 75, 75, 8, Vector2.Zero));
-                animator.PlayAnimation("Spin");
+                animator.CreateAnimation("medium", new Animation(8, 0, 0, 75, 75, 8, Vector2.Zero));
+                animator.PlayAnimation("medium");
             }
 
             else if (Energy == -1 || Energy == 1)
             {
-                animator.CreateAnimation("Spin", new Animation(8, 0, 0, 60, 60, 8, Vector2.Zero));
-                animator.PlayAnimation("Spin");
+                animator.CreateAnimation("mini", new Animation(8, 0, 0, 60, 60, 8, Vector2.Zero));
+                animator.PlayAnimation("mini");
             }
         }
 
