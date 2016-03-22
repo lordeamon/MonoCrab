@@ -52,10 +52,6 @@ namespace MonoCrab
             {
                 GameWorld.gameWorld.gameCamera.zoom = MathHelper.Lerp(GameWorld.gameWorld.gameCamera.zoom, 0.7f, 0.2f * GameWorld.gameWorld.deltaTime);
             }
-            else
-            {
-                Debug.Print("Outta bounds");
-            }
            
             if (!GameWorld.gameWorld.startGame)
             {
