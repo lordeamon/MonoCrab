@@ -2,37 +2,46 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoCrab
 {
-    class CBaitMachine : Component, ILoadable, IUpdateable, IDrawable, IOnCollisionEnter
+    class CBaitMachine : Component, IUpdateable
     {
+        private Vector2 origin;
+        private float minRange;
+        private float maxRange;
+        private Random rnd;
 
-        public CBaitMachine()
+        private float baitTimer = 0;
+
+
+
+        public CBaitMachine(GameObject go) : base(go)
         {
-
+            origin = go.Transform.position;
         }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void LoadContent(ContentManager content)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnCollisionEnter(CCollider other)
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public void Update()
         {
-            throw new NotImplementedException();
+            
+            //Update the enemy creation timer
+            //this.baitTimer += GameWorld.gameWorld
+
+            //Check if 5 seconds has elapsed
+            if (this.baitTimer >= 5)
+            {
+                //Create a new enemy
+                
+
+                //Add the enemy to the enemy list
+                
+
+                //Reset your counter
+                this.baitTimer = 0;
+            }
         }
     }
 }
