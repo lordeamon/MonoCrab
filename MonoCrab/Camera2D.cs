@@ -18,18 +18,17 @@ namespace MonoCrab
         private int scroll;
         KeyboardState oldState;
         KeyboardState oldState1;
+        private int totalCrabs = 0;
+        public bool shouldLerp = false;
         
-        private float zoom; // Camera Zoom
-        public float Zoom
-        {
-            get { return zoom; }
-            set { value = zoom; } // Negative zoom will flip image
-        }
+        public float zoom; // Camera Zoom
+        
         public Camera2D(Rectangle clientRect)
         {
-            zoom = 0.20f;
+            zoom = 0.165f;
             halfViewSize = new Vector2(clientRect.Width * 0.5f, clientRect.Height * 0.5f);
             UpdateViewMatrix();
+            
         }
 
         public Vector2 Pos
@@ -48,9 +47,15 @@ namespace MonoCrab
         
         public void Update()
         {
+            if (shouldLerp && zoom != 1.0f)
+            {
+               // GameWorld.gameWorld.gameCamera.zoom = MathHelper.Lerp(GameWorld.gameWorld.gameCamera.zoom, 1.0f, 0.5f * GameWorld.gameWorld.deltaTime);
+            }
+            
 
             for (int i = 0; i < GameWorld.gameWorld.GameObjects.Count; i++)
             {
+                
                // if (GameWorld.gameWorld.GameObjects[i].GetComponent("CCrab") != null)
                // {
                 if (!GameWorld.gameWorld.startGame)
@@ -63,12 +68,12 @@ namespace MonoCrab
                 }
                 else
                 {
+
                      target = GameWorld.gameWorld.GameObjects[targetIndex].Transform.position;
 
                 }
 
-                // }
-
+                
             }
             keyState = Keyboard.GetState();
 
@@ -131,12 +136,14 @@ namespace MonoCrab
             //Clamp the value so we can't go below zero
             zoom = MathHelper.Clamp(zoom, 0.0f, 10.0f);
             viewMatrix = Matrix.CreateTranslation(new Vector3(-position.X, -position.Y, 0)) * Matrix.CreateRotationZ(0.0f) *
-                                         Matrix.CreateScale(new Vector3(Zoom, Zoom, 1)) *
+                                         Matrix.CreateScale(new Vector3(zoom, zoom, 1.0f)) *
                                          Matrix.CreateTranslation(new Vector3(halfViewSize.X , halfViewSize.Y , 0));
             
 
             //viewMatrix = Matrix.CreateTranslation(halfViewSize.X - position.X, halfViewSize.Y - position.Y, 0.0f);
         }
-       
+
+        
+
     }
 }

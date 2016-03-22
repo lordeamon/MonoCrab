@@ -78,8 +78,8 @@ namespace MonoCrab
             gameObjects.Add(introMenu);
 
 
-            GameObject crab = new GameObject(new Vector2(3000,2400));
-            crab.AddComponent(new CSpriteRenderer(crab,"crab",Color.White,0.3f));
+            GameObject crab = new GameObject(new Vector2(5500,2300));
+            crab.AddComponent(new CSpriteRenderer(crab,"crab",Color.Red,0.5f));
             crab.AddComponent(new CAnimator(crab));
             crab.AddComponent(new CCrab(crab));
             crab.AddComponent(new CCollider(crab,true, 6));
@@ -87,14 +87,15 @@ namespace MonoCrab
 
 
 
-            GameObject newcrab = new GameObject(new Vector2(300, 300));
-            newcrab.AddComponent(new CSpriteRenderer(newcrab, "crab", Color.White, 1f));
+            GameObject newcrab = new GameObject(new Vector2(5650, 2000));
+            newcrab.AddComponent(new CSpriteRenderer(newcrab, "crab", Color.Red, 0.5f));
             newcrab.AddComponent(new CAnimator(newcrab));
             newcrab.AddComponent(new CCrab(newcrab));
+            newcrab.AddComponent(new CCollider(newcrab, true, 6));
             gameObjects.Add(newcrab);
 
             GameObject bait = new GameObject(new Vector2(6300,3500));
-            bait.AddComponent(new CSpriteRenderer(bait,"NegBait1",Color.White,1f));
+            bait.AddComponent(new CSpriteRenderer(bait,"NegBait1",Color.White,0.5f));
             bait.AddComponent(new CAnimator(bait));
 
             bait.AddComponent(new CBait(bait,1));
@@ -144,7 +145,7 @@ namespace MonoCrab
             spriteBatch = new SpriteBatch(GraphicsDevice);
             //AddGameObjects();
             // TODO: use this.Content to load your game content here
-            foreach (GameObject go in GameObjects)
+            foreach (GameObject go in GameObjects.ToList())
             {
                 if (go != null)
                 {
@@ -199,12 +200,13 @@ namespace MonoCrab
             
 
 
-            foreach (GameObject go in GameObjects)
+            foreach (GameObject go in GameObjects.ToList())
             {
                 go.Draw(spriteBatch);
             }
 
-            spriteBatch.Draw(background, Vector2.Zero);
+            spriteBatch.Draw(background, Vector2.Zero, null, null, Vector2.Zero, 0, null, Color.White,
+                SpriteEffects.None, 0f);
 
             spriteBatch.End();
             //spriteBatch.Begin();
