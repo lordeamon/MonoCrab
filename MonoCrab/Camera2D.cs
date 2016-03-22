@@ -32,7 +32,7 @@ namespace MonoCrab
             
         }
 
-        public Vector2 Pos
+        public Vector2 Position
         {
             get
             {
@@ -83,6 +83,7 @@ namespace MonoCrab
                 }
                 else
                 {
+                    //Minus one because of 0-index
                     targetIndex = GameWorld.gameWorld.CrabList.Count - 1;
                     
 
@@ -95,6 +96,7 @@ namespace MonoCrab
 
             if (NewKey1State.IsKeyDown(Keys.E) && oldState1.IsKeyUp(Keys.E))
             {
+                //Minus one because of 0-index
                 if (targetIndex < GameWorld.gameWorld.CrabList.Count - 1)
                 {
                     targetIndex++;
@@ -108,7 +110,7 @@ namespace MonoCrab
             }
             oldState1 = NewKey1State;
             
-            Pos = Vector2.Lerp(Pos, target, cameraSpeed * GameWorld.gameWorld.deltaTime);
+            Position = Vector2.Lerp(Position, target, cameraSpeed * GameWorld.gameWorld.deltaTime);
             //Check zoom
             mouseState = Mouse.GetState();
             if (mouseState.ScrollWheelValue > scroll)
