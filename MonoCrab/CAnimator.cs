@@ -20,7 +20,6 @@ namespace MonoCrab
         private float fps;
         public Rectangle[] rectangles;
         //The amount of pictures in your picture strip
-        private int stripLength = 4;
         private string animationName;
         public string AnimationName
         {

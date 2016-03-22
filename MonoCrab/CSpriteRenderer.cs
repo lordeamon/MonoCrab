@@ -10,13 +10,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoCrab
 {
-    class CSpriteRenderer : Component,ILoadable, IDrawable, IUpdateable
+    class CSpriteRenderer : Component,ILoadable, IDrawable
     {
         public Rectangle Rectangle { get; set; }
         private Texture2D sprite;
         private Vector2 offset;
         private Color color;
-        public float fade = 1f;
+        //opacity by defualt is 100%
+        public float opacity = 1f;
         private CAnimator animator;
         public Color drawColor
         {
@@ -72,19 +73,14 @@ namespace MonoCrab
             //if our game object has an animator, draw the current animation frame at the correct spot.
             if (gameObject.GetComponent("CAnimator") != null)
             {
-                spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor * fade, gameObject.Transform.rotation,new Vector2(Rectangle.Width / 2,Rectangle.Height / 2), 1, SpriteEffects.None, layerDepth);
+                spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor * opacity, gameObject.Transform.rotation,new Vector2(Rectangle.Width / 2,Rectangle.Height / 2), 1, SpriteEffects.None, layerDepth);
 
             }
             else
             {
-                 spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor * fade, gameObject.Transform.rotation,new Vector2(Sprite.Width / 2,sprite.Height / 2), 1, SpriteEffects.None, layerDepth);
+                 spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor * opacity, gameObject.Transform.rotation,new Vector2(Sprite.Width / 2,sprite.Height / 2), 1, SpriteEffects.None, layerDepth);
 
             }
-        }
-
-        public void Update()
-        {
-           
         }
     }
 }

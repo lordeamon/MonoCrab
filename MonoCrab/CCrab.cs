@@ -56,15 +56,11 @@ namespace MonoCrab
             {
                 if (t.GetComponent("CBait") != null)
                 {
-                    //CCrab bait = (CCrab)t.GetComponent("CCrab");
-
                     float dist = Vector2.Distance(t.Transform.position, gameObject.Transform.position);
                     if (dist < minDist)
                     {
                         closestTarget = t.Transform.position;
                         minDist = dist;
-                        //return closestTarget;
-                        
                     }
                 }
 
@@ -75,22 +71,17 @@ namespace MonoCrab
 
         public void Update()
         {
-           
-
             //If the main menu is active, don't start the crabs
             if (GameWorld.gameWorld.startGame)
             {
                 GetClosestBait();
                 gameObject.Transform.MoveTo(closestTarget, true);
             }
-            
-            
         }
 
         public void OnAnimationDone(string animationName)
         {
             animator.PlayAnimation("Walk");
-
         }
 
         public void CreateAnimations()

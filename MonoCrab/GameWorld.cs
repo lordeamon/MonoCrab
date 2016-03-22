@@ -136,8 +136,7 @@ namespace MonoCrab
            //this.IsMouseVisible = true;
             //Initialize the camera
             gameCamera = new Camera2D(graphics.GraphicsDevice.Viewport.Bounds);
-            //this.graphics.ToggleFullScreen();
-
+            
             base.Initialize();
         }
 
@@ -203,8 +202,6 @@ namespace MonoCrab
             // TODO: Add your drawing code here
             //
             spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, null, null, null, null, gameCamera.viewMatrix);
-            
-
 
             foreach (GameObject go in GameObjects.ToList())
             {
@@ -215,8 +212,6 @@ namespace MonoCrab
                 SpriteEffects.None, 0f);
 
             spriteBatch.End();
-            //spriteBatch.Begin();
-            //spriteBatch.End();
             base.Draw(gameTime);
         }
     }

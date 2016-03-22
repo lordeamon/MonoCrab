@@ -18,6 +18,7 @@ namespace MonoCrab
         private int scroll;
         KeyboardState oldState;
         KeyboardState oldState1;
+        private float crabZoom = 0.7f;
         private int totalCrabs = 0;
         public bool shouldLerp = false;
         
@@ -47,9 +48,13 @@ namespace MonoCrab
         
         public void Update()
         {
-            if (shouldLerp && zoom != 1.0f)
+            if (shouldLerp && zoom <= crabZoom)
             {
-                GameWorld.gameWorld.gameCamera.zoom = MathHelper.Lerp(GameWorld.gameWorld.gameCamera.zoom, 1.0f, 0.2f * GameWorld.gameWorld.deltaTime);
+                GameWorld.gameWorld.gameCamera.zoom = MathHelper.Lerp(GameWorld.gameWorld.gameCamera.zoom, 0.7f, 0.2f * GameWorld.gameWorld.deltaTime);
+            }
+            else
+            {
+                Debug.Print("Outta bounds");
             }
            
             if (!GameWorld.gameWorld.startGame)
