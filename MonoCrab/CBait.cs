@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoCrab
 {
-    class CBait : Component, ILoadable, IUpdateable, IOnCollisionEnter, IAnimateable
+    class CBait : Component, ILoadable, IOnCollisionEnter, IAnimateable
     {
         private CAnimator animator;
 
@@ -40,12 +40,6 @@ namespace MonoCrab
         public void LoadContent(ContentManager content)
         {
            CreateAnimations();
-        }
-
-
-        public void Update()
-        {
-            
         }
 
         public void CreateAnimations()

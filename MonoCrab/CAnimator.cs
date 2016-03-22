@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace MonoCrab
 {
-    class CAnimator : Component,IUpdateable, ILoadable
+    class CAnimator : Component,IUpdateable
     {
         private CSpriteRenderer spriteRenderer;
         private int currentIndex;
@@ -51,15 +51,6 @@ namespace MonoCrab
             fps = 5;
             animations = new Dictionary<string, Animation>();
             this.spriteRenderer = (CSpriteRenderer)gameObject.GetComponent("CSpriteRenderer");
-        }
-        public void LoadContent(ContentManager content)
-        {
-            //int width = spriteRenderer.Sprite.Width / animations[animationName].Fps;
-            //rectangles = new Rectangle[stripLength];
-            //for (int i = 0; i < stripLength; i++)
-            //{
-            //    rectangles[i] = new Rectangle(i * width, 0, width, spriteRenderer.Sprite.Height);
-            //}
         }
 
         public void Update()

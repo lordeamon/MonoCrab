@@ -18,7 +18,7 @@ namespace MonoCrab
 
         public void Update()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
