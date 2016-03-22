@@ -85,6 +85,7 @@
     <Compile Include="CAnimator.cs" />
     <Compile Include="Animation.cs" />
     <Compile Include="CCrab.cs" />
+    <Compile Include="CPlayer.cs" />
     <Compile Include="CrabBuilder.cs" />
     <Compile Include="Director.cs" />
     <Compile Include="IAnimateable.cs" />
