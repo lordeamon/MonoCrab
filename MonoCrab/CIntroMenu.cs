@@ -29,9 +29,9 @@ namespace MonoCrab
             }
             if (GameWorld.gameWorld.startGame)
             {
-                //fade = MathHelper.Lerp(1, 0, 5f*GameWorld.gameWorld.deltaTime);
-                spriteRenderer.fade -= 0.01f;
-                if (spriteRenderer.fade <= 0)
+                spriteRenderer.fade = MathHelper.Lerp(spriteRenderer.fade, 0, 5f*GameWorld.gameWorld.deltaTime);
+                //just remove the object if it's faded out
+                if (spriteRenderer.fade <= 0.01)
                 {
                 GameWorld.gameWorld.GameObjects.Remove(this.gameObject);
 
