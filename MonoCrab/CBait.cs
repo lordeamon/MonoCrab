@@ -31,14 +31,15 @@ namespace MonoCrab
         {
             this.Energy = energy;
             this.animator = (CAnimator)gameObject.GetComponent("CAnimator");
-            
-            
+            CreateAnimations();
+
+
 
         }
 
         public void LoadContent(ContentManager content)
         {
-           CreateAnimations();
+           //CreateAnimations();
         }
 
         public void CreateAnimations()

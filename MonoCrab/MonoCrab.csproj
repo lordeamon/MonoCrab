@@ -39,7 +39,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Windows\Debug\</OutputPath>
-    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -97,7 +97,6 @@
     <Compile Include="IOnCollisionStay.cs" />
     <Compile Include="IDrawable.cs" />
     <Compile Include="ILoadable.cs" />
-    <Compile Include="IStrategy.cs" />
     <Compile Include="IUpdateable.cs" />
     <Compile Include="CSpriteRenderer.cs" />
     <Compile Include="CTransform.cs" />

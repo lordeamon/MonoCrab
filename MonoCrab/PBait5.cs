@@ -23,7 +23,7 @@ namespace MonoCrab
             gameObject.AddComponent(new CCollider(gameObject, true, 8));
             gameObject.AddComponent(new CBait(gameObject, 5));
             GameWorld.gameWorld.BaitList.Add(gameObject);
-            GameWorld.gameWorld.GameObjects.Add(this.gameObject);
+            GameWorld.gameWorld.GameObjects.Add(gameObject);
         }
     }
 }

@@ -20,10 +20,11 @@ namespace MonoCrab
             gameObject = new GameObject(position);
             gameObject.AddComponent(new CSpriteRenderer(gameObject, "NegBait3", Color.White, 1));
             gameObject.AddComponent(new CAnimator(gameObject));
-            gameObject.AddComponent(new CCollider(gameObject, true, 8));
             gameObject.AddComponent(new CBait(gameObject, -3));
+            gameObject.AddComponent(new CCollider(gameObject, true, 8));
+            GameWorld.gameWorld.GameObjects.Add(gameObject);
             GameWorld.gameWorld.BaitList.Add(gameObject);
-            GameWorld.gameWorld.GameObjects.Add(this.gameObject);
+            
         }
     }
 }

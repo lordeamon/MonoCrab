@@ -11,7 +11,6 @@ namespace MonoCrab
     class CIntroMenu : Component, IUpdateable
     {
         private CSpriteRenderer spriteRenderer;
-        private float fade = 1;
         public CIntroMenu(GameObject gameObject) : base(gameObject)
         {
             this.spriteRenderer = (CSpriteRenderer) gameObject.GetComponent("CSpriteRenderer");

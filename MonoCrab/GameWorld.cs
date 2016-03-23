@@ -21,7 +21,6 @@ namespace MonoCrab
         public Rectangle displayRectangle;
         private Texture2D background;
         public bool startGame = false;
-        private float spawnTimer;
         public static GameWorld gameWorld
         {
             get
@@ -87,11 +86,11 @@ namespace MonoCrab
 
             Director crabDirector = new Director(new CrabBuilder());
             crabDirector.Construct(new Vector2(5500, 2300));
-            //crabDirector.Construct(new Vector2(5650, 2000));
+            crabDirector.Construct(new Vector2(5650, 2000));
 
-            Director baitDirector = new Director(new NBait1());
+            Director baitDirector = new Director(new NBait3());
             baitDirector.Construct(new Vector2(6300, 3500));
-            
+
         }
 
         /// <summary>
@@ -159,7 +158,6 @@ namespace MonoCrab
             }
             //Update our camera
             gameCamera.Update();
-            spawnTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
             base.Update(gameTime);
         }
         

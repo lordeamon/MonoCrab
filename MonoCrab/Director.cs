@@ -9,7 +9,6 @@ namespace MonoCrab
     class Director
     {
         private IBuilder builder;
-        private Vector2 position;
         public Director(IBuilder builder)
         {
             this.builder = builder;

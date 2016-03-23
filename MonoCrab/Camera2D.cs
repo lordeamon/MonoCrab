@@ -19,7 +19,6 @@ namespace MonoCrab
         KeyboardState oldState;
         KeyboardState oldState1;
         private float crabZoom = 0.7f;
-        private int totalCrabs = 0;
         public bool shouldLerp = false;
         
         public float zoom; // Camera Zoom

@@ -20,8 +20,6 @@ namespace MonoCrab
         //Should the collider be per pixel?
         private bool pixelCollision;
         private Dictionary<string, Color[][]> pixels = new Dictionary<string, Color[][]>();
-        private Color[] GetCurrentPixels;
-
         private Color[] CurrentPixels
         {
             
@@ -37,6 +35,8 @@ namespace MonoCrab
         }
         public CCollider(GameObject gameObject, bool pixelCollision, int frames) : base(gameObject)
         {
+            spriteRenderer = (CSpriteRenderer)gameObject.GetComponent("CSpriteRenderer");
+
             otherColliders = new List<CCollider>();
             GameWorld.gameWorld.Colliders.Add(this);
             this.pixelCollision = pixelCollision;
@@ -51,7 +51,7 @@ namespace MonoCrab
         {
             get
             {
-                return new Rectangle
+                 return new Rectangle
                     (
                     (int)(gameObject.Transform.position.X - spriteRenderer.Rectangle.Width /2 + spriteRenderer.Offset.X),
                     (int)(gameObject.Transform.position.Y - spriteRenderer.Rectangle.Height / 2 + spriteRenderer.Offset.Y),
@@ -82,7 +82,6 @@ namespace MonoCrab
         public void LoadContent(ContentManager content)
         {
 
-            spriteRenderer = (CSpriteRenderer)gameObject.GetComponent("CSpriteRenderer");
             texture = content.Load<Texture2D>("CollisionTexture");
             if (pixelCollision)
             {
