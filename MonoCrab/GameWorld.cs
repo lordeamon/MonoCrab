@@ -142,7 +142,7 @@ namespace MonoCrab
             background = Content.Load<Texture2D>("Background");
             IBuilder crabBuilder = new CrabBuilder();
             Director crabDirector = new Director(crabBuilder);
-            objectToAdd.Add(crabDirector.Construct(new Vector2(5200,4000)));
+            Add(crabDirector.Construct(new Vector2(5200,4000)));
         }
 
         /// <summary>
@@ -180,19 +180,19 @@ namespace MonoCrab
             }
             //Update our camera
             gameCamera.Update();
-            ObjectPoolControl();
+           // ObjectPoolControl();
             base.Update(gameTime);
         }
 
-        private void ObjectPoolControl()
-        {
-            foreach (var go in gameWorld.objectToAdd)
-            {
-                go.LoadContent(Content);
-            }
-            gameObjects.AddRange(objectToAdd);
-            objectToAdd.Clear();
-        }
+        //private void ObjectPoolControl()
+        //{
+        //    foreach (var go in gameWorld.objectToAdd)
+        //    {
+        //        go.LoadContent(Content);
+        //    }
+        //    gameObjects.AddRange(objectToAdd);
+        //    objectToAdd.Clear();
+        //}
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
@@ -215,6 +215,17 @@ namespace MonoCrab
 
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+
+        public void Add(GameObject go)
+        {
+            ObjectToAdd.Add(go);
+
+            if (!go.IsLoaded)
+            {
+                go.LoadContent(Content);
+            }
         }
     }
 }

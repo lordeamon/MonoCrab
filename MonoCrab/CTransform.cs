@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoCrab
 {
-    class CTransform : Component
+    public class CTransform : Component
     {
         public Vector2 position;
         public float rotation { get; set; }

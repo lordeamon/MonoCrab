@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 namespace MonoCrab
 {
-    class GameObject
+    public class GameObject
     {
         private bool isLoaded = false;
         private List<Component> components;
@@ -26,7 +26,13 @@ namespace MonoCrab
             }
         }
 
-        
+        public bool IsLoaded
+        {
+            get { return isLoaded; }
+            set { isLoaded = value; }
+        }
+
+
         public GameObject(Vector2 position)
         {
             
@@ -55,7 +61,7 @@ namespace MonoCrab
 
         public void LoadContent(ContentManager content)
         {
-            if (!isLoaded)
+            if (!IsLoaded)
             {
                 foreach (Component component in components)
                 {
@@ -67,7 +73,7 @@ namespace MonoCrab
 
             }
 
-            isLoaded = true;
+            IsLoaded = true;
 
         }
         public void Update()

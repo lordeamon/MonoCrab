@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MonoCrab
 {
-    abstract class Component
+    public abstract class Component
     {
         public GameObject gameObject { get; private set; }
 

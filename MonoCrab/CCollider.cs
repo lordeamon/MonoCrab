@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoCrab
 {
-    class CCollider : Component, IDrawable, ILoadable, IUpdateable
+    public class CCollider : Component, IDrawable, ILoadable, IUpdateable
     {
         private int animationframes;
         private CSpriteRenderer spriteRenderer;

@@ -39,7 +39,7 @@ namespace MonoCrab
             if (timePassed > timerLimit)
             {
                 BaitTypes randomBait = (BaitTypes)rnd.Next(0, Enum.GetNames(typeof(BaitTypes)).Length -1);
-                BaitPool.baitPoolInstance.Create(ChoosePosition(),randomBait);
+                GameWorld.gameWorld.Add(BaitPool.baitPoolInstance.Create(ChoosePosition(),randomBait));
                 //Reset your counter
                 timePassed = 0;
             }

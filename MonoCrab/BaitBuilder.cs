@@ -63,10 +63,6 @@ namespace MonoCrab
             gameObject.AddComponent(new CAnimator(gameObject));
             gameObject.AddComponent(new CCollider(gameObject, true, 8));
             gameObject.AddComponent(new CBait(gameObject, baitType));
-            
-            GameWorld.gameWorld.ObjectToAdd.Add(gameObject);
-            //GameWorld.gameWorld.BaitList.Add(gameObject);
-            //GameWorld.gameWorld.GameObjects.Add(gameObject);
         }
 
     }
