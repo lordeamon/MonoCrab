@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using Microsoft.Xna.Framework;
@@ -17,7 +18,7 @@ namespace MonoCrab
         SpriteBatch spriteBatch;
         public float deltaTime;
         public Camera2D gameCamera;
-        private static GameWorld GM;
+        private static GameWorld GM;    
         public Rectangle displayRectangle;
         private Texture2D background;
         public bool startGame = false;
@@ -39,7 +40,13 @@ namespace MonoCrab
             set { colliders = value; }
         }
         List<GameObject> gameObjects = new List<GameObject>();
-        
+
+        private List<GameObject> objectToAdd  = new List<GameObject>();
+        internal List<GameObject> ObjectToAdd
+        {
+            get { return objectToAdd; }
+            set { objectToAdd = value; }
+        }
 
         internal List<GameObject> GameObjects
         {
@@ -84,12 +91,11 @@ namespace MonoCrab
             gameObjects.Add(introMenu);
 
 
-            Director crabDirector = new Director(new CrabBuilder());
-            crabDirector.Construct(new Vector2(5500, 2300));
-            crabDirector.Construct(new Vector2(5650, 2000));
+           
+            //crabDirector.Construct(new Vector2(5500, 2300));
+            //crabDirector.Construct(new Vector2(5650, 2000));
 
-            Director baitDirector = new Director(new NBait3());
-            baitDirector.Construct(new Vector2(6300, 3500));
+            
 
         }
 
@@ -120,6 +126,7 @@ namespace MonoCrab
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             //AddGameObjects();
+            
             // TODO: use this.Content to load your game content here
             foreach (GameObject go in GameObjects.ToList())
             {
@@ -128,7 +135,14 @@ namespace MonoCrab
                     go.LoadContent(this.Content);
                 }
             }
+            foreach (GameObject go in objectToAdd)
+            {
+                go.LoadContent(this.Content);
+            }
             background = Content.Load<Texture2D>("Background");
+            IBuilder crabBuilder = new CrabBuilder();
+            Director crabDirector = new Director(crabBuilder);
+            objectToAdd.Add(crabDirector.Construct(new Vector2(5200,4000)));
         }
 
         /// <summary>
@@ -156,11 +170,29 @@ namespace MonoCrab
             {
                 go.Update();
             }
+            KeyboardState keystate = Keyboard.GetState();
+            if (keystate.IsKeyDown(Keys.N))
+            {
+                Random rnd = new Random();
+                BaitTypes randomBait = (BaitTypes)rnd.Next(0, Enum.GetNames(typeof(BaitTypes)).Length);
+                BaitPool.baitPoolInstance.Create(new Vector2(500, 500), randomBait);
+
+            }
             //Update our camera
             gameCamera.Update();
+            ObjectPoolControl();
             base.Update(gameTime);
         }
-        
+
+        private void ObjectPoolControl()
+        {
+            foreach (var go in gameWorld.objectToAdd)
+            {
+                go.LoadContent(Content);
+            }
+            gameObjects.AddRange(objectToAdd);
+            objectToAdd.Clear();
+        }
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>

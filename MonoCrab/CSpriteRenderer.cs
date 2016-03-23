@@ -14,6 +14,11 @@ namespace MonoCrab
     {
         public Rectangle Rectangle { get; set; }
         private Texture2D sprite;
+        public Texture2D Sprite
+        {
+            get { return sprite; }
+            set { sprite = value; }
+        }
         private Vector2 offset;
         private Color color;
         //opacity by defualt is 100%
@@ -24,11 +29,7 @@ namespace MonoCrab
             get { return color; }
             set { color = value; }
         }
-        public Texture2D Sprite
-        {
-            get { return sprite; }
-            set { value = sprite; }
-        }
+       
 
         public Vector2 Offset
         {
@@ -41,6 +42,9 @@ namespace MonoCrab
                 offset = value;
             }
         }
+
+        
+
         private string spriteName;
         private float layerDepth;
 
@@ -55,11 +59,11 @@ namespace MonoCrab
 
         public void LoadContent(ContentManager content)
         {
-            sprite = content.Load<Texture2D>(spriteName);
+            Sprite = content.Load<Texture2D>(spriteName);
             //If this gameobject does not have an animator, use a default rectangle.
             if (gameObject.GetComponent("CAnimator") == null)
             {
-                this.Rectangle = new Rectangle(0, 0, sprite.Width, sprite.Height);
+                this.Rectangle = new Rectangle(0, 0, Sprite.Width, Sprite.Height);
 
             }
             else
@@ -78,7 +82,7 @@ namespace MonoCrab
             }
             else
             {
-                 spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor * opacity, gameObject.Transform.rotation,new Vector2(Sprite.Width / 2,sprite.Height / 2), 1, SpriteEffects.None, layerDepth);
+                 spriteBatch.Draw(Sprite, gameObject.Transform.position + Offset, Rectangle, drawColor * opacity, gameObject.Transform.rotation,new Vector2(Sprite.Width / 2,Sprite.Height / 2), 1, SpriteEffects.None, layerDepth);
 
             }
         }

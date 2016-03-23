@@ -10,7 +10,7 @@ namespace MonoCrab
 {
     class GameObject
     {
-       
+        private bool isLoaded = false;
         private List<Component> components;
         private CTransform transform;
        
@@ -52,19 +52,34 @@ namespace MonoCrab
             }
             return null;
         }
-        
 
         public void LoadContent(ContentManager content)
         {
+            if (!isLoaded)
+            {
+                foreach (Component component in components)
+                {
+                    if (component is ILoadable)
+                    {
+                        (component as ILoadable).LoadContent(content);
+                    }
+                }
+
+            }
+
+            isLoaded = true;
+
+        }
+        public void Update()
+        {
             foreach (Component component in components)
             {
-                if (component is ILoadable)
+                if (component is IUpdateable)
                 {
-                    (component as ILoadable).LoadContent(content);
+                    (component as IUpdateable).Update();
                 }
             }
         }
-
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach (Component component in components)
@@ -77,16 +92,7 @@ namespace MonoCrab
             }
         }
 
-        public void Update()
-        {
-            foreach (Component component in components)
-            {
-                if (component is IUpdateable)
-                {
-                    (component as IUpdateable).Update();
-                }
-            }
-        }
+       
 
         public void OnAnimationDone(string animationName)
         {

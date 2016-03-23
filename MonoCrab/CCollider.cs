@@ -40,7 +40,6 @@ namespace MonoCrab
             otherColliders = new List<CCollider>();
             GameWorld.gameWorld.Colliders.Add(this);
             this.pixelCollision = pixelCollision;
-            animator = (CAnimator)gameObject.GetComponent("CAnimator");
             this.animationframes = frames;
 
         }
@@ -82,6 +81,7 @@ namespace MonoCrab
         public void LoadContent(ContentManager content)
         {
 
+            animator = (CAnimator)gameObject.GetComponent("CAnimator");
             texture = content.Load<Texture2D>("CollisionTexture");
             if (pixelCollision)
             {

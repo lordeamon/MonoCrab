@@ -78,6 +78,8 @@
   <PropertyGroup />
   <PropertyGroup />
   <ItemGroup>
+    <Compile Include="BaitBuilder.cs" />
+    <Compile Include="BaitPool.cs" />
     <Compile Include="Camera2D.cs" />
     <Compile Include="CBait.cs" />
     <Compile Include="CBaitMachine.cs" />

@@ -9,9 +9,10 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 namespace MonoCrab
 {
-    class CBaitMachine : Component, IUpdateable
+    class CBaitMachine : Component, IUpdateable, ILoadable
     {
         private Vector2 origin;
+        private GameObject go;
         private float minRange = 100;
         private float maxRange = 500;
         private Random rnd;
@@ -21,9 +22,10 @@ namespace MonoCrab
 
 
 
-        public CBaitMachine(GameObject go, float timerLimit) : base(go)
+        public CBaitMachine(GameObject gameObject, float timerLimit) : base(gameObject)
         {
-            origin = go.Transform.position;
+            this.go = gameObject;
+            origin = gameObject.Transform.position;
             this.timerLimit = timerLimit;
             rnd = new Random(DateTime.Now.Millisecond);
 
@@ -36,53 +38,8 @@ namespace MonoCrab
             //Check if 5 seconds has elapsed
             if (timePassed > timerLimit)
             {
-                //int baitType = rnd.Next(0, 5);
-
-                //if (baitType == 0)
-                //{
-                    //Create a new enemy
-                    //Director Director = new Director(new NBait1());
-                    //Director.Construct(new Vector2(origin.X + 50, origin.Y + 50));
-
-                //}
-
-                //else if (baitType == 1)
-                //{
-                //    //Create a new enemy
-                //    Director Director = new Director(new NBait3());
-                //    Director.Construct(new Vector2(origin.X + 50, origin.Y + 50));
-
-                //}
-                //else if (baitType == 2)
-                //{
-                //    //Create a new enemy
-                //    Director Director = new Director(new NBait5());
-                //    Director.Construct(new Vector2(origin.X + 50, origin.Y + 50));
-
-                //}
-                //else if (baitType == 3)
-                //{
-                //    //Create a new enemy
-                //    Director Director = new Director(new PBait1());
-                //    Director.Construct(new Vector2(origin.X + 50, origin.Y + 50));
-
-                //}
-                //else if (baitType == 4)
-                //{
-                //    //Create a new enemy
-                //    Director Director = new Director(new PBait3());
-                //    Director.Construct(new Vector2(origin.X + 50, origin.Y + 50));
-
-                //}
-                //else if (baitType == 5)
-                //{
-                //    //Create a new enemy
-                //    Director Director = new Director(new PBait5());
-                //    Director.Construct(new Vector2(origin.X + 50, origin.Y + 50));
-
-                //}
-                
-
+                BaitTypes randomBait = (BaitTypes)rnd.Next(0, Enum.GetNames(typeof(BaitTypes)).Length -1);
+                BaitPool.baitPoolInstance.Create(ChoosePosition(),randomBait);
                 //Reset your counter
                 timePassed = 0;
             }
@@ -92,10 +49,7 @@ namespace MonoCrab
             
         }
 
-        private void CreateBuild()
-        {
-
-        }
+        
         public Vector2 ChoosePosition()
         {
 
@@ -135,5 +89,9 @@ namespace MonoCrab
         }
 
 
+        public void LoadContent(ContentManager content)
+        {
+            
+        }
     }
 }

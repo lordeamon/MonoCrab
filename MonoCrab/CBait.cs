@@ -11,9 +11,9 @@ namespace MonoCrab
     class CBait : Component, ILoadable, IOnCollisionEnter, IAnimateable
     {
         private CAnimator animator;
-
+        private CSpriteRenderer spriteRenderer;
         private int energy;
-
+        private BaitTypes baitType;
         public int Energy
         {
             get
@@ -27,10 +27,11 @@ namespace MonoCrab
             }
         }
 
-        public CBait(GameObject gameObject, int energy) : base(gameObject)
+        public CBait(GameObject gameObject, BaitTypes baitType) : base(gameObject)
         {
             this.Energy = energy;
             this.animator = (CAnimator)gameObject.GetComponent("CAnimator");
+            this.baitType = baitType;
             CreateAnimations();
 
 
@@ -44,19 +45,19 @@ namespace MonoCrab
 
         public void CreateAnimations()
         { 
-            if(Energy == -5 || Energy == 5)
+            if(baitType == BaitTypes.PosBait5 || baitType == BaitTypes.NegBait5)
             { 
             animator.CreateAnimation("large", new Animation(8, 0, 0, 90, 90, 8, Vector2.Zero));
             animator.PlayAnimation("large");
             }
-            
-            else if (Energy == -3 || Energy == 3 )
+
+            if (baitType == BaitTypes.PosBait3 || baitType == BaitTypes.NegBait3)
             {
                 animator.CreateAnimation("medium", new Animation(8, 0, 0, 75, 75, 8, Vector2.Zero));
                 animator.PlayAnimation("medium");
             }
 
-            else if (Energy == -1 || Energy == 1)
+            if (baitType == BaitTypes.PosBait1 || baitType == BaitTypes.NegBait1)
             {
                 animator.CreateAnimation("mini", new Animation(8, 0, 0, 60, 60, 8, Vector2.Zero));
                 animator.PlayAnimation("mini");
