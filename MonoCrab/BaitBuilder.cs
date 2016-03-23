@@ -8,12 +8,13 @@ namespace MonoCrab
 {
     enum BaitTypes
     {
-        NegBait1,
-        NegBait3,
-        NegBait5,
         PosBait1,
+        NegBait1,
         PosBait3,
-        PosBait5
+        NegBait3,
+        PosBait5,
+        NegBait5
+        
     }
     class BaitBuilder : IBuilder
     {

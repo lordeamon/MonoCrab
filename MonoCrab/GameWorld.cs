@@ -142,7 +142,7 @@ namespace MonoCrab
             background = Content.Load<Texture2D>("Background");
             IBuilder crabBuilder = new CrabBuilder();
             Director crabDirector = new Director(crabBuilder);
-            Add(crabDirector.Construct(new Vector2(5200,4000)));
+            Add(crabDirector.Construct(new Vector2(5500,2100)));
         }
 
         /// <summary>
@@ -175,24 +175,24 @@ namespace MonoCrab
             {
                 Random rnd = new Random();
                 BaitTypes randomBait = (BaitTypes)rnd.Next(0, Enum.GetNames(typeof(BaitTypes)).Length);
-                BaitPool.baitPoolInstance.Create(new Vector2(500, 500), randomBait);
+                Add(BaitPool.baitPoolInstance.Create(new Vector2(5500, 2100), randomBait));
 
             }
             //Update our camera
             gameCamera.Update();
-           // ObjectPoolControl();
+            ObjectPoolControl();
             base.Update(gameTime);
         }
 
-        //private void ObjectPoolControl()
-        //{
-        //    foreach (var go in gameWorld.objectToAdd)
-        //    {
-        //        go.LoadContent(Content);
-        //    }
-        //    gameObjects.AddRange(objectToAdd);
-        //    objectToAdd.Clear();
-        //}
+        private void ObjectPoolControl()
+        {
+            foreach (var go in gameWorld.objectToAdd)
+            {
+                go.LoadContent(Content);
+            }
+            gameObjects.AddRange(objectToAdd);
+            objectToAdd.Clear();
+        }
         /// <summary>
         /// This is called when the game should draw itself.
         /// </summary>
