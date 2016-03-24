@@ -85,6 +85,7 @@
     <Compile Include="CBaitMachine.cs" />
     <Compile Include="CCollider.cs" />
     <Compile Include="CIntroMenu.cs" />
+    <Compile Include="CLoadingUI.cs" />
     <Compile Include="Component.cs" />
     <Compile Include="CAnimator.cs" />
     <Compile Include="Animation.cs" />
@@ -121,10 +122,10 @@
     <Content Include="Content\CollisionTexture.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\crab.png">
+    <Content Include="Content\Background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Background.png">
+    <Content Include="Content\crab.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\NegBait1.png">

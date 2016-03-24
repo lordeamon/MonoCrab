@@ -38,10 +38,14 @@ namespace MonoCrab
             //Check if 5 seconds has elapsed
             if (timePassed > timerLimit && GameWorld.gameWorld.startGame)
             {
-                BaitTypes randomBait = (BaitTypes)rnd.Next(0, Enum.GetNames(typeof(BaitTypes)).Length -1);
-                GameWorld.gameWorld.Add(BaitPool.baitPoolInstance.Create(ChoosePosition(),randomBait));
+                if (GameWorld.gameWorld.BaitList.Count <= 30)
+                {
+                    BaitTypes randomBait = (BaitTypes)rnd.Next(0, Enum.GetNames(typeof(BaitTypes)).Length - 1);
+                    GameWorld.gameWorld.Add(BaitPool.baitPoolInstance.Create(ChoosePosition(), randomBait));
+                }
                 //Reset your counter
                 timePassed = 0;
+
             }
             
             timePassed += (float)GameWorld.gameWorld.deltaTime;

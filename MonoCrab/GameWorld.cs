@@ -61,7 +61,7 @@ namespace MonoCrab
         }
         List<GameObject> baitlist = new List<GameObject>();
 
-
+        
         internal List<GameObject> BaitList
         {
             get { return baitlist; }
@@ -143,6 +143,8 @@ namespace MonoCrab
             IBuilder crabBuilder = new CrabBuilder();
             Director crabDirector = new Director(crabBuilder);
             Add(crabDirector.Construct(new Vector2(5500,2100)));
+            Add(crabDirector.Construct(new Vector2(5500, 2400)));
+
         }
 
         /// <summary>

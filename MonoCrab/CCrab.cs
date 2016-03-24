@@ -81,12 +81,12 @@ namespace MonoCrab
 
         public void OnAnimationDone(string animationName)
         {
-            animator.PlayAnimation("Walk");
+            //animator.PlayAnimation("Walk");
         }
 
         public void CreateAnimations()
         {
-            animator.CreateAnimation("Walk", new Animation(6, 0, 0, 256, 255, 10, Vector2.Zero));
+            animator.CreateAnimation("Walk", new Animation(6, 0, 0, 256, 256, 10, Vector2.Zero));
             animator.PlayAnimation("Walk");
         }
 
@@ -98,6 +98,7 @@ namespace MonoCrab
             {
                 Debug.Print("COLLIDED WITH BAIT");
                 GameWorld.gameWorld.GameObjects.Remove(other.gameObject);
+                GameWorld.gameWorld.BaitList.Remove(other.gameObject);
             }
         }
 
